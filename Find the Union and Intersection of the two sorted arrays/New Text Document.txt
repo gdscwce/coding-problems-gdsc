@@ -1,1 +1,73 @@
-add you code file to this folder
+#include <iostream>
+#include <vector>
+
+// Function to find and print the union of two sorted arrays.
+void findUnion(const std::vector<int>& arr1, const std::vector<int>& arr2) {
+    std::vector<int> unionResult;
+    int i = 0, j = 0;
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i] < arr2[j]) {
+            unionResult.push_back(arr1[i]);
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            unionResult.push_back(arr2[j]);
+            j++;
+        } else {
+            unionResult.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+    }
+
+    // Copy any remaining elements from both arrays.
+    while (i < arr1.size()) {
+        unionResult.push_back(arr1[i]);
+        i++;
+    }
+
+    while (j < arr2.size()) {
+        unionResult.push_back(arr2[j]);
+        j++;
+    }
+
+    std::cout << "Union of the two arrays: ";
+    for (int num : unionResult) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+}
+
+
+void findIntersection(const std::vector<int>& arr1, const std::vector<int>& arr2) {
+    std::vector<int> intersectionResult;
+    int i = 0, j = 0;
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i] < arr2[j]) {
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            j++;
+        } else {
+            intersectionResult.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+    }
+
+    std::cout << "Intersection of the two arrays: ";
+    for (int num : intersectionResult) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr1 = {1, 2, 4, 5, 6};
+    std::vector<int> arr2 = {2, 3, 5, 7};
+
+    findUnion(arr1, arr2);
+    findIntersection(arr1, arr2);
+
+    return 0;
+}
