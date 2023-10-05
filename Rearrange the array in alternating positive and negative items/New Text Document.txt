@@ -1,1 +1,50 @@
-add you code file to this folder
+#include <iostream>
+#include <vector>
+
+void rearrangeAlternating(std::vector<int>& arr) {
+    int n = arr.size();
+    if (n <= 1) return; 
+
+
+    int left = 0;
+    int right = n - 1;
+
+    while (left < right) {
+        while (arr[left] > 0 && left < n) {
+            left++;
+        }
+        while (arr[right] < 0 && right >= 0) {
+            right--;
+        }
+
+        if (left < right) {
+            std::swap(arr[left], arr[right]);
+            left++;
+            right--;
+        }
+    }
+
+
+    left = 1;
+    right = n - 1;
+
+    while (left < right && arr[left] < 0) {
+        std::swap(arr[left], arr[right]);
+        left += 2;
+        right--;
+    }
+}
+
+int main() {
+    std::vector<int> arr = {-1, 2, -3, 4, 5, -6, 7, -8};
+    
+    rearrangeAlternating(arr);
+
+    std::cout << "Rearranged array with alternating positive and negative items: ";
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
