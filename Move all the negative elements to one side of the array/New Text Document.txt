@@ -1,1 +1,40 @@
-add you code file to this folder
+#include <iostream>
+#include <vector>
+
+void moveNegativesToOneSide(std::vector<int>& arr) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        if (arr[left] < 0 && arr[right] < 0) {
+            // Both elements are negative, move the left pointer to the right.
+            left++;
+        } else if (arr[left] >= 0 && arr[right] < 0) {
+            // Left is positive, right is negative, swap them.
+            std::swap(arr[left], arr[right]);
+            left++;
+            right--;
+        } else if (arr[left] >= 0 && arr[right] >= 0) {
+            // Both elements are positive, move the right pointer to the left.
+            right--;
+        } else {
+            // Left is negative, right is positive, move both pointers.
+            left++;
+            right--;
+        }
+    }
+}
+
+int main() {
+    std::vector<int> arr = {-12, 11, -13, -5, 6, -7, 5, -3, -6};
+    
+    moveNegativesToOneSide(arr);
+
+    std::cout << "Array with negative elements moved to one side: ";
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
